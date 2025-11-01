@@ -71,8 +71,19 @@ def evaluate_all_methods(
         in_channels=num_features,
         hidden_channels=64,
         out_channels=num_classes,
-        num_layers=2
+        num_layers=2,
+        dropout=0.0
     ).to(device)
+    
+    # Load trained model if available
+    from pathlib import Path
+    model_path = Path(__file__).parent.parent / 'results' / 'models' / 'trained_gcn.pth'
+    if model_path.exists() and dataset_name == 'SYNTHETIC':
+        print(f"Loading trained model from {model_path}")
+        model.load_state_dict(torch.load(model_path, map_location=device))
+    else:
+        print("Warning: Using untrained model (predictions may be random)")
+    
     model.eval()
     
     # Initialize explainers
