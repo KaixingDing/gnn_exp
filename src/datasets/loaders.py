@@ -63,12 +63,69 @@ def create_simple_graph():
     return data
 
 
+def create_synthetic_dataset(num_graphs=10, num_nodes_range=(5, 15), num_features=10):
+    """
+    Create a synthetic dataset with multiple graphs.
+    
+    Args:
+        num_graphs: Number of graphs to generate
+        num_nodes_range: Range of nodes per graph (min, max)
+        num_features: Number of node features
+        
+    Returns:
+        List of graph Data objects
+    """
+    import random
+    dataset = []
+    
+    for i in range(num_graphs):
+        # Random number of nodes
+        num_nodes = random.randint(num_nodes_range[0], num_nodes_range[1])
+        
+        # Create random edges (ensure connectivity)
+        edges = []
+        # First create a spanning tree for connectivity
+        for j in range(1, num_nodes):
+            parent = random.randint(0, j-1)
+            edges.append([parent, j])
+            edges.append([j, parent])
+        
+        # Add some random edges
+        num_extra_edges = random.randint(num_nodes//2, num_nodes)
+        for _ in range(num_extra_edges):
+            u = random.randint(0, num_nodes-1)
+            v = random.randint(0, num_nodes-1)
+            if u != v:
+                edges.append([u, v])
+                edges.append([v, u])
+        
+        # Remove duplicates
+        edges = list(set(tuple(e) for e in edges))
+        edges = [[e[0], e[1]] for e in edges]
+        
+        if len(edges) > 0:
+            edge_index = torch.tensor(edges, dtype=torch.long).t()
+        else:
+            edge_index = torch.tensor([[], []], dtype=torch.long)
+        
+        # Random features
+        x = torch.randn(num_nodes, num_features)
+        
+        # Binary classification (balanced)
+        y = torch.tensor([i % 2], dtype=torch.long)
+        
+        data = Data(x=x, edge_index=edge_index, y=y)
+        dataset.append(data)
+    
+    return dataset
+
+
 def get_dataset(name: str, root='./data'):
     """
     Get dataset by name.
     
     Args:
-        name: Dataset name ('MUTAG', 'BA-Shapes', 'PPI', or 'simple')
+        name: Dataset name ('MUTAG', 'BA-Shapes', 'PPI', 'SIMPLE', or 'SYNTHETIC')
         root: Root directory for datasets
         
     Returns:
@@ -84,6 +141,8 @@ def get_dataset(name: str, root='./data'):
         return load_ppi(root)
     elif name == 'SIMPLE':
         return [create_simple_graph()]
+    elif name == 'SYNTHETIC':
+        return create_synthetic_dataset(num_graphs=20, num_nodes_range=(8, 20), num_features=10)
     else:
         raise ValueError(f"Unknown dataset: {name}")
 

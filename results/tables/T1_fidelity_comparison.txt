@@ -1,0 +1,13 @@
+Table T1: Fidelity Comparison
+================================================================================
+
+               SYNTHETIC_Fid+  SYNTHETIC_Fid-
+Method                                       
+GNNExplainer            1.128           0.010
+GradCAM                 1.000           0.000
+GraphMask               1.125           0.007
+Ours-Edge               1.332           0.068
+Ours-Global             1.140           0.027
+Ours-Node               1.000           0.000
+Ours-Subgraph           1.044           0.002
+PGExplainer             1.074           0.019
