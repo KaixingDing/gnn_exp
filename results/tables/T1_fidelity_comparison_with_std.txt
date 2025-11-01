@@ -1,0 +1,12 @@
+Table T1: Fidelity Comparison (Mean ± Standard Deviation)
+================================================================================
+
+              Fidelity+ (mean±std) Fidelity- (mean±std)
+GradCAM                1.000±0.000          0.000±0.000
+Ours-Node              1.000±0.000          0.000±0.000
+Ours-Edge              0.933±0.223          0.661±0.375
+Ours-Subgraph          0.824±0.356          0.039±0.152
+Ours-Global            0.775±0.395          0.215±0.392
+PGExplainer            0.707±0.459          0.068±0.172
+GraphMask              0.677±0.450          0.104±0.244
+GNNExplainer           0.624±0.470          0.053±0.137

@@ -1,0 +1,9 @@
+,Sparsity (mean±std)
+Ours-Edge,0.901±0.095
+Ours-Global,0.782±0.132
+Ours-Node,0.228±0.128
+GradCAM,0.192±0.172
+PGExplainer,0.118±0.184
+GNNExplainer,0.015±0.019
+GraphMask,0.014±0.017
+Ours-Subgraph,0.000±0.000
