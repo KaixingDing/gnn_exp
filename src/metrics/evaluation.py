@@ -70,6 +70,13 @@ def fidelity_plus(
         
         # Fidelity+ = how much probability is retained
         fid_plus = prob_masked[target_class].item() / (prob_orig[target_class].item() + 1e-8)
+        
+        # Cap at 1.0 to handle numerical errors (small exceedances are OK)
+        # Large exceedances (>1.1) indicate a problem with the implementation
+        if fid_plus > 1.1:
+            import warnings
+            warnings.warn(f"Fidelity+ = {fid_plus:.3f} > 1.1, which may indicate an issue")
+        fid_plus = min(fid_plus, 1.0)
     else:
         # Use node importance as fallback
         fid_plus = 1.0

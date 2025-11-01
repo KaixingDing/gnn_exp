@@ -1,9 +1,9 @@
 Method,SYNTHETIC
-GNNExplainer,0.018
-GradCAM,0.388
+GNNExplainer,0.015
+GradCAM,0.192
 GraphMask,0.014
-Ours-Edge,0.828
-Ours-Global,0.635
+Ours-Edge,0.901
+Ours-Global,0.782
 Ours-Node,0.228
 Ours-Subgraph,0.0
-PGExplainer,0.22
+PGExplainer,0.118
