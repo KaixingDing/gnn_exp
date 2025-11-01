@@ -35,8 +35,8 @@ env/
 # Data
 data/
 *.pkl
-*.pth
-*.pt
+# *.pth  # Commented out to allow trained models in results/
+# *.pt   # Commented out to allow trained models in results/
 
 # Jupyter
 .ipynb_checkpoints/
