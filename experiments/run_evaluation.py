@@ -167,13 +167,13 @@ def main():
     print(f"Using device: {device}")
     
     # Datasets to evaluate
-    datasets = ['SIMPLE', 'MUTAG', 'BA-Shapes']
+    datasets = ['SYNTHETIC']
     
     all_results = []
     
     for dataset_name in datasets:
         try:
-            df = evaluate_all_methods(dataset_name, device, num_samples=5)
+            df = evaluate_all_methods(dataset_name, device, num_samples=20)
             all_results.append(df)
         except Exception as e:
             print(f"Error evaluating {dataset_name}: {e}")

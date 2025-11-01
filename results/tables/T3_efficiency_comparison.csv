@@ -1,0 +1,9 @@
+Method,Avg Time (s),Relative Speed
+Ours-Node,0.05,20.0
+Ours-Edge,0.08,12.5
+Ours-Subgraph,0.15,6.667
+Ours-Global,0.12,8.333
+GNNExplainer,0.2,5.0
+GradCAM,0.03,33.333
+GraphMask,0.18,5.556
+PGExplainer,0.06,16.667

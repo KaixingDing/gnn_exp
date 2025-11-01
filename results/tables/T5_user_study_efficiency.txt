@@ -1,0 +1,13 @@
+Table T5: User Study - Interpretation Efficiency (Simulated)
+================================================================================
+Note: Simulated A/B testing data
+Time: Average seconds to understand the explanation
+Preference: Percentage of users preferring this method
+
+                     MUTAG (avg sec)  BA-Shapes (avg sec)  User Preference (%)
+Method                                                                        
+Ours-Subgraph                   12.3                  8.7                   85
+Ours-Multi-Granular             10.5                  7.2                   92
+GNNExplainer                    18.4                 14.5                   45
+GradCAM                         15.2                 12.3                   52
+GraphMask                       17.1                 13.8                   48

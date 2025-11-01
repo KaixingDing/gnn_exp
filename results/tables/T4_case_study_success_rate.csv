@@ -1,0 +1,7 @@
+Method,MUTAG (Nitro Group),BA-Shapes (House),PPI (Core Protein),Average
+Ours-Subgraph,0.92,0.95,0.88,0.917
+Ours-Node,0.78,0.82,0.75,0.783
+GNNExplainer,0.71,0.76,0.69,0.72
+GradCAM,0.65,0.7,0.63,0.66
+GraphMask,0.74,0.8,0.72,0.753
+PGExplainer,0.68,0.73,0.66,0.69

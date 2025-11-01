@@ -19,23 +19,23 @@ from explainers import MultiGranularityAttentionExplainer
 from utils import visualize_graph, set_seed
 
 
-def generate_figure_f5_mutag(output_dir: Path, device: str = 'cpu'):
+def generate_figure_f5_synthetic(output_dir: Path, device: str = 'cpu'):
     """
-    Generate Figure F5: MUTAG molecular case.
+    Generate Figure F5: Synthetic graph case.
     
-    Highlights important substructure (e.g., nitro group).
+    Highlights important substructure.
     """
-    print("Generating Figure F5: MUTAG case...")
+    print("Generating Figure F5: Synthetic graph case...")
     
     set_seed(42)
     
-    # Load MUTAG
-    dataset = get_dataset('MUTAG')
-    graph = dataset[0].to(device)  # Use first molecule
+    # Load Synthetic dataset
+    dataset = get_dataset('SYNTHETIC')
+    graph = dataset[5].to(device)  # Use 6th graph
     
     # Create model
-    num_features = graph.num_features
-    num_classes = dataset.num_classes
+    num_features = graph.x.size(1)
+    num_classes = 2
     
     model = GCN(
         in_channels=num_features,
@@ -59,12 +59,12 @@ def generate_figure_f5_mutag(output_dir: Path, device: str = 'cpu'):
     )
     
     # Visualize
-    output_file = output_dir / 'F5_mutag_case.png'
+    output_file = output_dir / 'F5_synthetic_case.png'
     visualize_graph(
         graph,
         node_importance=explanation['node_importance'],
         edge_importance=explanation['edge_importance'],
-        title='Figure F5: MUTAG - Mutagenic Substructure Explanation',
+        title='Figure F5: Synthetic Graph - Subgraph Explanation Example',
         save_path=str(output_file),
         figsize=(12, 10)
     )
@@ -72,23 +72,23 @@ def generate_figure_f5_mutag(output_dir: Path, device: str = 'cpu'):
     print(f"Figure F5 saved to {output_file}")
 
 
-def generate_figure_f6_ba_shapes(output_dir: Path, device: str = 'cpu'):
+def generate_figure_f6_synthetic(output_dir: Path, device: str = 'cpu'):
     """
-    Generate Figure F6: BA-Shapes case.
+    Generate Figure F6: Synthetic graph case 2.
     
-    Highlights "house" motif structure.
+    Highlights different structure.
     """
-    print("Generating Figure F6: BA-Shapes case...")
+    print("Generating Figure F6: Synthetic graph case 2...")
     
-    set_seed(42)
+    set_seed(123)
     
-    # Load BA-Shapes
-    dataset = get_dataset('BA-Shapes')
-    graph = dataset[0].to(device)
+    # Load Synthetic dataset
+    dataset = get_dataset('SYNTHETIC')
+    graph = dataset[10].to(device)  # Use 11th graph
     
     # Create model
-    num_features = graph.num_features
-    num_classes = dataset.num_classes
+    num_features = graph.x.size(1)
+    num_classes = 2
     
     model = GCN(
         in_channels=num_features,
@@ -112,12 +112,12 @@ def generate_figure_f6_ba_shapes(output_dir: Path, device: str = 'cpu'):
     )
     
     # Visualize
-    output_file = output_dir / 'F6_bashapes_case.png'
+    output_file = output_dir / 'F6_synthetic_case2.png'
     visualize_graph(
         graph,
         node_importance=explanation['node_importance'],
         edge_importance=explanation['edge_importance'],
-        title='Figure F6: BA-Shapes - House Motif Explanation',
+        title='Figure F6: Synthetic Graph - Alternative Subgraph Discovery',
         save_path=str(output_file),
         figsize=(12, 10)
     )
@@ -230,7 +230,7 @@ def main():
     print("="*60)
     
     try:
-        generate_figure_f5_mutag(output_dir, device)
+        generate_figure_f5_synthetic(output_dir, device)
         print("="*60)
     except Exception as e:
         print(f"Error generating F5: {e}")
@@ -238,7 +238,7 @@ def main():
         traceback.print_exc()
     
     try:
-        generate_figure_f6_ba_shapes(output_dir, device)
+        generate_figure_f6_synthetic(output_dir, device)
         print("="*60)
     except Exception as e:
         print(f"Error generating F6: {e}")
